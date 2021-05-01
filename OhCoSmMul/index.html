@@ -28,7 +28,7 @@
 		<div class="container container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="https://geo-social.com">Geog 3540</a>
+				<a class="navbar-brand" href="https://geo-social.com">Geog 5540</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="defaultNavbar1">
@@ -36,10 +36,11 @@
 
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="bio_page.html">About</a></li>
 							<li><a href="resume.html">Resume</a></li>
 							<li class="divider"></li>
-							<li><a href="william-cooper@uiowa.edu">Contact</a></li>
+							<li class="nav-link">
+              <a href="mailto:william-cooper@uiowa.edu">Contact</a>
+            </li>
 						</ul>
 					</li>
 				</ul>
@@ -53,7 +54,7 @@
 	<div class="container">
 		<div class="content">
 			<div class="row">
-					<h1>Housing and Gender in Ohio</h1>
+					<h1>Housing Characteristics in Ohio</h1>
 			</div>
 			<hr />
 			<div class="row">
@@ -82,12 +83,12 @@
 			<br />
 			<div class="row">
 				<div class="col-sm-6">
-					<span><p><h3 class='mapTitle'>Rooms Per House</h3>Median number of rooms per housing unit for each Ohio county.</p></span>
+					<span><p><h3 class='mapTitle'>Owner Occupied W/O Mortgage</h3>Percentage of homes occupied by the owner that do not have mortages.</p></span>
 					<div id="divMap1"></div>
 					<div id="divHist1"></div>
 				</div>
 				<div class="col-sm-6">
-					<h3 class='mapTitle'>Percent Home Owners</h3><p>Percentage of housing unit occupied by the owner (not renter).</p>
+					<h3 class='mapTitle'>Mortgage 35% or More of Income</h3><p>Percentage of housing units occupied by owner where the mortage accounts for 35 percent of total income or more.</p>
 					<div id="divMap2"></div>
 					<div id="divHist2"></div>
 				</div>
@@ -100,7 +101,7 @@
 					<div id="divHist3"></div>
 				</div>
 				<div class="col-sm-6">
-					<h3 class='mapTitle'>Sex Ratio</h3><p>Males per 100 females in each ohio county.</p>
+					<h3 class='mapTitle'>Renters</h3><p>Percentage of homes occupied by renters.</p>
 					<div id="divMap4"></div>
 					<div id="divHist4"></div>
 				</div>
@@ -116,9 +117,9 @@
 
 	/////////////////////////////////////////////////////////////////////////////////////////////////
 	// TODO: Change the variables below to customize the small multiples interface for your data
-	var polygonJSONFile = 'data/OhioCounties.geojson'
+	var polygonJSONFile = 'data/OhioHousing.geojson'
 	// change the projection if needed *d3.geoAlbers()*
-	var projection = d3.geoAlbers();
+	var projection = d3.geoTransverseMercator().rotate([85,0]).fitExtent([[80, 80], [width, height]]);
 	var widthheightRatio = 0.6;
 	// Relative placement of legend that ranges between 0 and 1.
 	// 0 is the start, whereas 1 i the end of each panel.
@@ -139,10 +140,10 @@
 	// att1format: enter the d3.format string to display the variables in the format you like
 	// Check this link on how to specify the desired format:
 	// https://observablehq.com/@d3/d3-format
-	var att1 = 'OhioCountiesData_Median_rooms', att1alias = 'Median Number of Rooms Per House', att1format = '.1f',
-	att2 = 'OhioCountiesData_Percent_Owner_occupied', att2alias =  '% Occupied by Owner', att2format = '.0f',
-	att3 = 'OhioCountiesData_Percent_Occupied_housing_units_Moved_in_2017_or_later', att3alias = '% House Occupants moved in 2017 or later', att3format = '.0f',
-	att4 = 'OhioCountiesData_Estimate_males_per_100_females', att4alias = 'Males per 100 females', att4format = '.0f';
+	var att1 = 'OhioCountiesData_Pct_Owner_OCC_WO_Mortgage', att1alias = '% homes occupied by owner without a mortgage', att1format = '.0f',
+	att2 = 'OhioCountiesData_PCT_Mortgates_35plusPCT_income', att2alias =  '% home mortages that equal %35+ of household income', att2format = '.0f',
+	att3 = 'OhioCountiesData_Percent_Occupied_housing_units_Moved_in_2017_or_later', att3alias = '% house occupants moved in 2017 or later', att3format = '.0f',
+	att4 = 'OhioCountiesData_Percent_Renter_occupied', att4alias = '% homes occuiped by renters', att4format = '.0f';
 
 
 
