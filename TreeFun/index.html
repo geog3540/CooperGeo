@@ -111,7 +111,7 @@ var formatLegend = d3.format(".2f");
 // keep the background polygons transparent.
 // Background polygons are still needed (even if you don't symbolize them)
 // to set the frame of the point layer.
-var polygonOpacity = 0;
+var polygonOpacity = 0.5;
 var colors = colorbrewer.Greys;
 var numOfClasses = 4;
 
@@ -138,7 +138,7 @@ var circleFill = "#de2d26";
 // var criticalFill = "#de2d26";
 
 // circle stroke color
-var circleStroke = "#67000d";
+var circleStroke = "gray";
 // circle fill opacity
 var circleOpacity = .5;
 
@@ -354,8 +354,19 @@ d3.json(polygonJSONFile, function(geoShape) {
 				// set point symbology
 				points.style("stroke", circleStroke)
 				.style("fill-opacity", circleOpacity)
-				.style("fill", circleFill)
-				.style("stroke-width" , "1px")
+				.style("fill", function(d){
+					if(d.properties.Condition == "Critical/Dead")
+						return "#de2d26";
+					else if (d.properties.Condition == "Good")
+				    return "#00FF00";
+					else if(d.properties.Condition == "Fair")
+					  return "#FFFF00";
+					else if(d.properties.Condition == "Poor")
+					  return "#FFA500";
+					else
+					 return 'white';
+				})
+				.style("stroke-width" , "0.5px")
 				.attr("transform",
 				function(d) {
 					return "translate("+
