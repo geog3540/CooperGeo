@@ -321,15 +321,39 @@ d3.json(polygonJSONFile, function(geoShape) {
 			// .titleWidth(300)
 			// .scale(polygoncolors);
 
-			legendsvg.select(".legendQuant")
-			.call(legend);
+			var ordinal = d3.scaleOrdinal()
+			  .domain(["a", "b", "c", "d", "e"])
+			  .range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
+
+			var svg = d3.select("svg");
+
+			svg.append("g")
+			  .attr("class", "legendOrdinal")
+			  .attr("transform", "translate(20,20)");
+
+			var legendOrdinal = d3.legendColor()
+			  //d3 symbol creates a path-string, for example
+			  //"M0,-8.059274488676564L9.306048591020996,
+			  //8.059274488676564 -9.306048591020996,8.059274488676564Z"
+			  .shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
+			  .shapePadding(10)
+			  //use cellFilter to hide the "e" cell
+			  .cellFilter(function(d){ return d.label !== "e" })
+			  .scale(ordinal);
+
+			svg.select(".legendOrdinal")
+			  .call(legendOrdinal);
+
+
+			// legendsvg.select(".legendQuant")
+			// .call(legend);
 
 			// fit the SVG element to leaflet's map layer
 			function resetMap() {
 				//change map colors given the topic
-				polygoncolors = d3.scaleQuantile()
-				.range(colorsArray)
-				.domain(polygonValues);
+				// polygoncolors = d3.scaleQuantile()
+				// .range(colorsArray)
+				// .domain(polygonValues);
 
 				//update global text variables when map is updated.
 				bounds = path.bounds(geoShape);

@@ -108,3 +108,9 @@ html,body {
 .leaflet-container.crosshair-cursor-enabled {
   cursor: pointer;
 }
+
+.square {
+  height: 50px;
+  width: 50px;
+  background-color: #555;
+}
