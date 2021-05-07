@@ -34,6 +34,14 @@ html,body {
   padding-left: 50px;
 }
 
+#legendpointcolors{
+
+}
+
+.legendOrdinal{
+  
+}
+
 .legendQuant{
   font-style: normal;
   font-weight: normal;

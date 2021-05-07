@@ -70,12 +70,12 @@
 						My inspiration for this project is from seeing the impact that tree damage to personal property has on average people, who are often unaware of the great risk until after they have sustained damge during a storm. After undergrad, I worked in a volunteer program with FEMA, where I was able to talk to many distaster survivors immediately following extreme storm events. A common theme that I heard from people was that they had never imagined the level of risk that living near trees posed. There were many examples that I saw where this lack of awareness caused extreme personal hardships post-storm, such as dozens of people whose homes were destroyed from tree damage, but had not included tree damage in their insurance policies, either because they hadn't thought of it or had determined (often without much thought) that the risk of tree damage wasn't that big of a deal.
 					</p>
 					<p>
-						
+
 					</p>
 				</div>
-				
+
 			</div>
-			
+
 			<div class="col-md-12">
 				<div class="row">
 					<h2>
@@ -104,7 +104,7 @@
 				</div>
 				<div class="row">
 					<p>
-						Would you be able to identify a potentially hazardous tree in your own backyard?  
+						Would you be able to identify a potentially hazardous tree in your own backyard?
 					</p>
 					<p>
 						The follow examples are trees that were identified as being in either critical or poor condition. The images were captured by Google street view in November 2019, roughly 9 months before the 2020 derecho event.
@@ -128,9 +128,9 @@
 					</p>
 				</div>
 				<div class="row">
-		
+
 						<iframe src="https://www.google.com/maps/embed?pb=!4v1620345825230!6m8!1m7!1s2jLNu3KnUXW3kY17TCOaPQ!2m2!1d41.67101011233746!2d-91.55266029186882!3f122.67974480825123!4f14.405634529559919!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-					
+
 				</div>
 				<div class="row">
 					<h4>
@@ -147,9 +147,9 @@
 					</p>
 				</div>
 				<div class="row">
-		
+
 						<iframe src="https://www.google.com/maps/embed?pb=!4v1620347064159!6m8!1m7!1sKTWouwwABXbTKSYiiQUqQA!2m2!1d41.66920357202299!2d-91.5256915161654!3f313.00986818727534!4f20.300755369031478!5f0.7820865974627469" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-					
+
 				</div>
 			</div>
 			<div class="row">
@@ -167,9 +167,9 @@
 					</p>
 				</div>
 				<div class="row">
-		
+
 						<iframe src="https://www.google.com/maps/embed?pb=!4v1620348947038!6m8!1m7!1sIjkvO4ON2unjNy5RkSqclA!2m2!1d41.65891995594479!2d-91.51976336223404!3f159.4937708617165!4f23.22832369385212!5f0.7820865974627469" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-					
+
 				</div>
 			</div>
 
@@ -247,8 +247,12 @@ var circleFill = "#de2d26";
 // circle stroke color
 var circleStroke = "gray";
 // circle fill opacity
-var circleOpacity = .5;
+var circleOpacity = 0.5;
 
+var critical = true;
+var good = true;
+var poor = true;
+var fair = true;
 
 //DO NOT CHANGE ANYTHING BELOW THIS POINT UNLESS YOU KNOW WHAT YOU ARE DOING
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -367,9 +371,7 @@ d3.json(polygonJSONFile, function(geoShape) {
 			// .attr("fill", circleFill)
 			.attr("fill", circleFill)
 			// .attr("fill", d => color(data.get(d.properties.NAME)[0]))
-
-
-			.attr("fill-opacity", circleOpacity)
+			.attr("fill-opacity", 0)
 			.attr("stroke", circleStroke)
 			.attr ("stroke-width" , ".1px")
 			// .attr("cy", function(d){
@@ -406,52 +408,34 @@ d3.json(polygonJSONFile, function(geoShape) {
 					.attr('y', function(d){ return (legy - Math.abs(radius(d))) + 4})
 					.attr('shape-rendering', 'crispEdges')
 					.style('text-anchor', 'end')
-					.style('fill', '#888')
 					.attr('font-family', 'Raleway')
-					.attr('font-size', 10)
+					.attr('font-size', 12)
 					.text(function(d){ return formatPointLegend(d) + suffix})
 					.attr('transform', 'translate(0,' + radius(d3.max(legendValues)) + ')');
 
-			//create chropleth map legend
-			var legendsvg = d3.select("#legendcolors").append("svg");
+			//point color legend
+			var ordinal = d3.scaleOrdinal()
+			  .domain(["Critical", "b", "c", "d", "e"])
+			  .range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
 
-			// legendsvg.append("g")
-			// .attr("class", "legendQuant")
-			// .attr("transform", "translate(20,20)");
+				var legendcolorsvg = d3.select("#legendcolors").append("svg");
 
-			// var legend = d3.legendColor()
-			// .labelFormat(formatLegend)
-			// .useClass(false)
-			// .title(attributeAlias)
-			// .titleWidth(300)
-			// .scale(polygoncolors);
+			legendcolorsvg.append("g")
+			  .attr("class", "legendOrdinal")
+			  .attr("transform", "translate(20,20)");
 
-			// var ordinal = d3.scaleOrdinal()
-			//   .domain(["a", "b", "c", "d", "e"])
-			//   .range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
+			var legendOrdinal = d3.legendColor()
+			  //d3 symbol creates a path-string, for example
+			  //"M0,-8.059274488676564L9.306048591020996,
+			  //8.059274488676564 -9.306048591020996,8.059274488676564Z"
+			  .shape("path", d3.symbol().type(d3.symbolCircle).size(150)())
+			  .shapePadding(10)
+			  //use cellFilter to hide the "e" cell
+			  .cellFilter(function(d){ return d.label !== "e" })
+			  .scale(ordinal);
 
-			// var svg = d3.select("svg");
-
-			// svg.append("g")
-			//   .attr("class", "legendOrdinal")
-			//   .attr("transform", "translate(20,20)");
-
-			// var legendOrdinal = d3.legendColor()
-			//   //d3 symbol creates a path-string, for example
-			//   //"M0,-8.059274488676564L9.306048591020996,
-			//   //8.059274488676564 -9.306048591020996,8.059274488676564Z"
-			//   .shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
-			//   .shapePadding(10)
-			//   //use cellFilter to hide the "e" cell
-			//   .cellFilter(function(d){ return d.label !== "e" })
-			//   .scale(ordinal);
-
-			// svg.select(".legendOrdinal")
-			//   .call(legendOrdinal);
-
-
-			// legendsvg.select(".legendQuant")
-			// .call(legend);
+			legendcolorsvg.select(".legendOrdinal")
+			  .call(legendOrdinal);
 
 			// fit the SVG element to leaflet's map layer
 			function resetMap() {
@@ -486,16 +470,16 @@ d3.json(polygonJSONFile, function(geoShape) {
 				points.style("stroke", circleStroke)
 				.style("fill-opacity", circleOpacity)
 				.style("fill", function(d){
-					if(d.properties.Condition == "Critical/Dead")
+					if(d.properties.Condition == "Critical/Dead" && critical)
 						return "#de2d26";
-					else if (d.properties.Condition == "Good")
+					else if (d.properties.Condition == "Good" && good)
 				    return "#00FF00";
-					else if(d.properties.Condition == "Fair")
+					else if(d.properties.Condition == "Fair" && fair)
 					  return "#FFFF00";
-					else if(d.properties.Condition == "Poor")
+					else if(d.properties.Condition == "Poor" && poor)
 					  return "#FFA500";
-					else
-					 return 'white';
+					// else
+					//  return 'white';
 				})
 				.style("stroke-width" , "0.5px")
 				.attr("transform",
