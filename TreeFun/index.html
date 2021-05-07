@@ -26,7 +26,7 @@
 		<div class="container container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-				<a class="navbar-brand" href="https://geo-social.com">Geog 5540</a>
+				<a class="navbar-brand" href="\">Geog 5540</a>
 			</div>
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse" id="defaultNavbar1">
@@ -34,10 +34,10 @@
 
 					<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span></a>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="../shortbio.html">About</a></li>
+							<li><a href="\bio_page.html">About</a></li>
 							<li><a href="\resume.html">Resume</a></li>
 							<li class="divider"></li>
-							<li><a href="caglar-koylu@uiowa.edu">Contact</a></li>
+							<li><a href="william-cooper@uiowa.edu">Contact</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -53,20 +53,123 @@
 
 	<div class="container">
 		<div class="col-md-12">
-			<h2></h2>
 			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-12">
-						<div id="map"></div>
-					</div>
+					<h1>
+						Iowa City Trees: Size and Condition
+					</h1>
+				</div>
+				<div class="row">
+					<h2>
+						Introduction
+					</h2>
+					<p>
+						My goal for this project is to communicate the risk of damage to personal property from tree damage during storms. My intended audience is average citizens who are not experienced with GIS data and interpretting complex maps.
+					</p>
+					<p>
+						My inspiration for this project is from seeing the impact that tree damage to personal property has on average people, who are often unaware of the great risk until after they have sustained damge during a storm. After undergrad, I worked in a volunteer program with FEMA, where I was able to talk to many distaster survivors immediately following extreme storm events. A common theme that I heard from people was that they had never imagined the level of risk that living near trees posed. There were many examples that I saw where this lack of awareness caused extreme personal hardships post-storm, such as dozens of people whose homes were destroyed from tree damage, but had not included tree damage in their insurance policies, either because they hadn't thought of it or had determined (often without much thought) that the risk of tree damage wasn't that big of a deal.
+					</p>
+					<p>
+						
+					</p>
+				</div>
+				
+			</div>
+			
+			<div class="col-md-12">
+				<div class="row">
+					<h2>
+						Interactive tree map
+					</h2>
 				</div>
 				<div class="row">
 					<div class="col-md-3">
 						<div id="legendpoints"></div>
 					</div>
 					<div class="col-md-3">
-						<div id="legend"></div>
+						<div id="legendcolors">This is where the point shape legend will go</div>
 					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div id="map"></div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="row">
+					<h3>
+						Example trees in critical / poor condition
+					</h3>
+				</div>
+				<div class="row">
+					<p>
+						Would you be able to identify a potentially hazardous tree in your own backyard?  
+					</p>
+					<p>
+						The follow examples are trees that were identified as being in either critical or poor condition. The images were captured by Google street view in November 2019, roughly 9 months before the 2020 derecho event.
+					</p>
+					<p>
+						Try to imagine whether you would realize from first glance that these examples fell into one of the major risk categories.
+					</p>
+				</div>
+				<div class="row">
+					<h4>
+						Example tree 1:
+					</h4>
+					<p>
+						PrimaryID: 18933
+					</p>
+					<p>
+						Species: White oak
+					</p>
+					<p>
+						DBH: 52 inches
+					</p>
+				</div>
+				<div class="row">
+		
+						<iframe src="https://www.google.com/maps/embed?pb=!4v1620345825230!6m8!1m7!1s2jLNu3KnUXW3kY17TCOaPQ!2m2!1d41.67101011233746!2d-91.55266029186882!3f122.67974480825123!4f14.405634529559919!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					
+				</div>
+				<div class="row">
+					<h4>
+						Example tree 2:
+					</h4>
+					<p>
+						PrimaryID: 2008
+					</p>
+					<p>
+						Species: Sugar maple
+					</p>
+					<p>
+						DBH: 51 inches
+					</p>
+				</div>
+				<div class="row">
+		
+						<iframe src="https://www.google.com/maps/embed?pb=!4v1620347064159!6m8!1m7!1sKTWouwwABXbTKSYiiQUqQA!2m2!1d41.66920357202299!2d-91.5256915161654!3f313.00986818727534!4f20.300755369031478!5f0.7820865974627469" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					
+				</div>
+			</div>
+			<div class="row">
+					<h4>
+						Example tree 3:
+					</h4>
+					<p>
+						PrimaryID: 3261
+					</p>
+					<p>
+						Species: Sugar maple
+					</p>
+					<p>
+						DBH: 47 inches
+					</p>
+				</div>
+				<div class="row">
+		
+						<iframe src="https://www.google.com/maps/embed?pb=!4v1620348947038!6m8!1m7!1sIjkvO4ON2unjNy5RkSqclA!2m2!1d41.65891995594479!2d-91.51976336223404!3f159.4937708617165!4f23.22832369385212!5f0.7820865974627469" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+					
 				</div>
 			</div>
 
@@ -75,6 +178,8 @@
 </div>
 
 <script type="text/javascript">
+
+
 
 //BASEMAP SETTINGS
 //change the center of your map in setView
@@ -85,7 +190,7 @@
 // var map = L.map('map').setView([centerLatitude, centerLongitude], zoomLevel);
 
 //alternative to setting center coordinates and zoom level, zoom to the spatial extent (bounding box) of the dataset
-var southWest = L.latLng(41.61, -91.63), northEast = L.latLng(41.76, -91.72), bounds = L.latLngBounds(southWest, northEast);
+var southWest = L.latLng(41.62, -91.50), northEast = L.latLng(41.66, -91.55), bounds = L.latLngBounds(southWest, northEast);
 var map = L.map('map').fitBounds(bounds);
 
 var blackwhite = "http://{s}.sm.mapstack.stamen.com/(toner-lite,$fff[difference],$fff[@23],$fff[hsl-saturation@20])/{z}/{x}/{y}.png";
@@ -111,7 +216,7 @@ var formatLegend = d3.format(".2f");
 // keep the background polygons transparent.
 // Background polygons are still needed (even if you don't symbolize them)
 // to set the frame of the point layer.
-var polygonOpacity = 0.5;
+var polygonOpacity = 0;
 var colors = colorbrewer.Greys;
 var numOfClasses = 4;
 
@@ -126,12 +231,12 @@ var tooltipTitle = "Address";
 // id attribute for points to be used for creating tooltip
 var pointKey = "FID";
 // list all variables to be included in the information window on hover over tooltip
-var variablesOnInfoWindow = ["Condition", "CommonName", "LatinName", "Address"];
+var variablesOnInfoWindow = ["PrimaryID", "Condition", "CommonName", "LatinName", "Address"];
 var formatPointLegend = d3.format(".2s");
 // suffix for legend
 var suffix = " in."
 // enter the minimum and maximum pixel values for the proportional symbols
-var minRadius = 0.1, maxRadius = 15;
+var minRadius = 1, maxRadius = 20;
 // circle fill color
 var circleFill = "#de2d26";
 // var goodFill = "#00FF00";
@@ -247,7 +352,7 @@ d3.json(polygonJSONFile, function(geoShape) {
 			legendpsvg.append("g")
 			.append("text")
 			.attr('font-family', 'Raleway')
-			.attr('font-size', 14)
+			.attr('font-size', 12)
 			.text(pointTitle)
 			.attr('transform', 'translate(0,20)');
 
@@ -266,7 +371,7 @@ d3.json(polygonJSONFile, function(geoShape) {
 
 			.attr("fill-opacity", circleOpacity)
 			.attr("stroke", circleStroke)
-			.attr ("stroke-width" , "1px")
+			.attr ("stroke-width" , ".1px")
 			// .attr("cy", function(d){
 			// 	return -radius(d);
 			// })
@@ -308,7 +413,7 @@ d3.json(polygonJSONFile, function(geoShape) {
 					.attr('transform', 'translate(0,' + radius(d3.max(legendValues)) + ')');
 
 			//create chropleth map legend
-			var legendsvg = d3.select("#legend").append("svg");
+			var legendsvg = d3.select("#legendcolors").append("svg");
 
 			// legendsvg.append("g")
 			// .attr("class", "legendQuant")
@@ -321,28 +426,28 @@ d3.json(polygonJSONFile, function(geoShape) {
 			// .titleWidth(300)
 			// .scale(polygoncolors);
 
-			var ordinal = d3.scaleOrdinal()
-			  .domain(["a", "b", "c", "d", "e"])
-			  .range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
+			// var ordinal = d3.scaleOrdinal()
+			//   .domain(["a", "b", "c", "d", "e"])
+			//   .range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
 
-			var svg = d3.select("svg");
+			// var svg = d3.select("svg");
 
-			svg.append("g")
-			  .attr("class", "legendOrdinal")
-			  .attr("transform", "translate(20,20)");
+			// svg.append("g")
+			//   .attr("class", "legendOrdinal")
+			//   .attr("transform", "translate(20,20)");
 
-			var legendOrdinal = d3.legendColor()
-			  //d3 symbol creates a path-string, for example
-			  //"M0,-8.059274488676564L9.306048591020996,
-			  //8.059274488676564 -9.306048591020996,8.059274488676564Z"
-			  .shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
-			  .shapePadding(10)
-			  //use cellFilter to hide the "e" cell
-			  .cellFilter(function(d){ return d.label !== "e" })
-			  .scale(ordinal);
+			// var legendOrdinal = d3.legendColor()
+			//   //d3 symbol creates a path-string, for example
+			//   //"M0,-8.059274488676564L9.306048591020996,
+			//   //8.059274488676564 -9.306048591020996,8.059274488676564Z"
+			//   .shape("path", d3.symbol().type(d3.symbolTriangle).size(150)())
+			//   .shapePadding(10)
+			//   //use cellFilter to hide the "e" cell
+			//   .cellFilter(function(d){ return d.label !== "e" })
+			//   .scale(ordinal);
 
-			svg.select(".legendOrdinal")
-			  .call(legendOrdinal);
+			// svg.select(".legendOrdinal")
+			//   .call(legendOrdinal);
 
 
 			// legendsvg.select(".legendQuant")
@@ -442,9 +547,9 @@ d3.json(polygonJSONFile, function(geoShape) {
 
  			// if not empty, all attributes in this array are plotted each on a new line in the pop-up window
 			variablesOnInfoWindow.forEach(function (d) {
-				if(Number(props[d]))
-					labelAttribute += "<br><b>" + d + ": "+ formatPointLegend(props[d]) + "</b>";
-				else
+				// if(Number(props[d]))
+				// 	labelAttribute += "<br><b>" + d + ": "+ (formatPointLegend(props[d]) + "</b>";
+				// else
 					labelAttribute += "<br><b>" + d + ": "+ props[d] + "</b>";
 			});
 			var labelName = data[pointKey];
@@ -464,8 +569,8 @@ d3.json(polygonJSONFile, function(geoShape) {
 		};
 
 		function moveLabel() {
-			var x = d3.event.clientX-50; //horizontal label coordinate based mouse position stored in d3.event
-			var y = d3.event.clientY-50; //vertical label coordinate
+			var x = d3.event.clientX; //horizontal label coordinate based mouse position stored in d3.event
+			var y = d3.event.clientY+250; //vertical label coordinate
 			d3.select(".infolabel") //select the label div for moving
 			.style("margin-left", x+"px") //reposition label horizontal
 			.style("margin-top", y+"px"); //reposition label vertical
