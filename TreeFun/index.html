@@ -83,18 +83,36 @@
 					</h2>
 				</div>
 				<div class="row">
-					<div class="col-md-3">
+					<div>
 						<div id="legendpoints"></div>
-					</div>
-					<div class="col-md-3">
-						<div id="legendcolors">This is where the point shape legend will go</div>
 					</div>
 				</div>
 				<div class="row">
+					
+				
+					<div>
+						<div id="legendcolors"></div>
+					</div>
+				</div>
+				<div class="row">				    
+					<label for="conditions">Tree condition:</label>
+					<select name="conditions" id="conditions">
+					  <option value="AllConditions">All Conditions</option>	
+					  <option value="Critical/Dead">Critical</option>
+					  <option value="Poor">Poor</option>
+					  <option value="Fair">Fair</option>
+					  <option value="Good">Good</option>
+					  <option value="Excellent">Excellent</option>
+					</select>
+					<button id="condition_btn">Go</button>
+
+					
 					<div class="col-md-12">
 						<div id="map"></div>
 					</div>
+					
 				</div>
+				
 			</div>
 			<div class="col-md-12">
 				<div class="row">
@@ -221,9 +239,11 @@ var colors = colorbrewer.Greys;
 var numOfClasses = 4;
 
 // POINT SYMBOL MAP SETTINGS //////////////////////////////////////////////////////////////////////
-var pointJSONFile = "data/ICTreesClean.geojson";
-// title for the legend
+var pointJSONFile = "data/ICTrees3.geojson";
+// titles for the legend
 var pointTitle = "Diameter in Inches at Breast Height"
+
+var colorTitle = "Condition"
 // attribute name to be used for proportional symbols
 var pointVariable = "DBH";
 
@@ -236,7 +256,7 @@ var formatPointLegend = d3.format(".2s");
 // suffix for legend
 var suffix = " in."
 // enter the minimum and maximum pixel values for the proportional symbols
-var minRadius = 1, maxRadius = 20;
+var minRadius = 1, maxRadius = 15;
 // circle fill color
 var circleFill = "#de2d26";
 // var goodFill = "#00FF00";
@@ -253,6 +273,7 @@ var critical = true;
 var good = true;
 var poor = true;
 var fair = true;
+var excellent = true;
 
 //DO NOT CHANGE ANYTHING BELOW THIS POINT UNLESS YOU KNOW WHAT YOU ARE DOING
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -358,7 +379,8 @@ d3.json(polygonJSONFile, function(geoShape) {
 			.attr('font-family', 'Raleway')
 			.attr('font-size', 12)
 			.text(pointTitle)
-			.attr('transform', 'translate(0,20)');
+			.attr('font-weight', 2)
+			.attr('transform', 'translate(50,20)');
 
 			legendpsvg.append("g")
 			.selectAll("g")
@@ -409,20 +431,28 @@ d3.json(polygonJSONFile, function(geoShape) {
 					.attr('shape-rendering', 'crispEdges')
 					.style('text-anchor', 'end')
 					.attr('font-family', 'Raleway')
-					.attr('font-size', 12)
+					.attr('font-size', 6)
+					.attr('line-height', 10)
 					.text(function(d){ return formatPointLegend(d) + suffix})
 					.attr('transform', 'translate(0,' + radius(d3.max(legendValues)) + ')');
 
 			//point color legend
 			var ordinal = d3.scaleOrdinal()
-			  .domain(["Critical", "b", "c", "d", "e"])
-			  .range([ "rgb(153, 107, 195)", "rgb(56, 106, 197)", "rgb(93, 199, 76)", "rgb(223, 199, 31)", "rgb(234, 118, 47)"]);
+			  .domain(["Critical", "Poor", "Fair", "Good", "Excellent"])
+			  .range([ "#de2d26", "#FFA500", "#FFFF00", "#bae4b3", "green"]);
 
 				var legendcolorsvg = d3.select("#legendcolors").append("svg");
 
 			legendcolorsvg.append("g")
 			  .attr("class", "legendOrdinal")
 			  .attr("transform", "translate(20,20)");
+
+			legendcolorsvg.append("g")
+			.append("text")
+			.attr('font-family', 'Raleway')
+			.attr('font-size', 12)
+			.text(colorTitle)
+			.attr('transform', 'translate(20,0)');
 
 			var legendOrdinal = d3.legendColor()
 			  //d3 symbol creates a path-string, for example
@@ -431,7 +461,7 @@ d3.json(polygonJSONFile, function(geoShape) {
 			  .shape("path", d3.symbol().type(d3.symbolCircle).size(150)())
 			  .shapePadding(10)
 			  //use cellFilter to hide the "e" cell
-			  .cellFilter(function(d){ return d.label !== "e" })
+			  .cellFilter(function(d){ return d.label })
 			  .scale(ordinal);
 
 			legendcolorsvg.select(".legendOrdinal")
@@ -467,19 +497,47 @@ d3.json(polygonJSONFile, function(geoShape) {
 				.attr("fill-opacity", polygonOpacity);
 
 				// set point symbology
-				points.style("stroke", circleStroke)
-				.style("fill-opacity", circleOpacity)
+				points.style("stroke", function(d){
+					if(d.properties.Condition == "Critical/Dead" && critical)
+						return circleOpacity;
+					else if (d.properties.Condition == "Good" && good)
+				    return circleStroke;
+					else if(d.properties.Condition == "Fair" && fair)
+					  return circleStroke;
+					else if(d.properties.Condition == "Poor" && poor)
+					  return circleStroke;
+					else if(d.properties.Condition == "Excellent" && excellent)
+					  return circleStroke;
+					else
+					 return "";
+				})
+				.style("fill-opacity", function(d){
+					if(d.properties.Condition == "Critical/Dead" && critical)
+						return circleOpacity;
+					else if (d.properties.Condition == "Good" && good)
+				    return circleOpacity;
+					else if(d.properties.Condition == "Fair" && fair)
+					  return circleOpacity;
+					else if(d.properties.Condition == "Poor" && poor)
+					  return circleOpacity;
+					else if(d.properties.Condition == "Excellent" && excellent)
+					  return circleOpacity;
+					else
+					 return 0;
+				})
 				.style("fill", function(d){
 					if(d.properties.Condition == "Critical/Dead" && critical)
 						return "#de2d26";
 					else if (d.properties.Condition == "Good" && good)
-				    return "#00FF00";
+				    return "#bae4b3";
 					else if(d.properties.Condition == "Fair" && fair)
 					  return "#FFFF00";
 					else if(d.properties.Condition == "Poor" && poor)
 					  return "#FFA500";
-					// else
-					//  return 'white';
+					else if(d.properties.Condition == "Excellent" && excellent)
+					  return "green";
+					else
+					 return 'white';
 				})
 				.style("stroke-width" , "0.5px")
 				.attr("transform",
@@ -490,12 +548,22 @@ d3.json(polygonJSONFile, function(geoShape) {
 				}
 			)
 			.attr("r", function(d){
-				return radius(d.properties[pointVariable]);
+				if(d.properties.Condition == "Critical/Dead" && critical)
+						return radius(d.properties[pointVariable]);
+					else if (d.properties.Condition == "Good" && good)
+				    return radius(d.properties[pointVariable]);
+					else if(d.properties.Condition == "Fair" && fair)
+					  return radius(d.properties[pointVariable]);
+					else if(d.properties.Condition == "Poor" && poor)
+					  return radius(d.properties[pointVariable]);
+					else if(d.properties.Condition == "Excellent" && excellent)
+					  return radius(d.properties[pointVariable]);
+	
 			}).on("mouseover", highlight)
 			.on("mouseout", dehighlight)
 			.on("mousemove", moveLabel);
 
-		}//end of reset map
+		}//end of  map
 
 		// Use Leaflet to implement a D3 geometric transformation.
 		function projectPoint(x, y) {
@@ -524,6 +592,77 @@ d3.json(polygonJSONFile, function(geoShape) {
 				return value === source ? target : value;
 			};
 		}
+
+		function criticalCon(){
+			good = false;
+			fair = false;
+			excellent = false;
+			poor = false;
+			critical = true;
+		};
+
+		function poorCon(){
+			good = false;
+			fair = false;
+			excellent = false;
+			poor = true;
+			critical = false;
+		};
+
+		function fairCon(){
+			good = false;
+			fair = true;
+			excellent = false;
+			poor = false;
+			critical = false;
+		};
+
+		function goodCon(){
+			good = true;
+			fair = false;
+			excellent = false;
+			poor = false;
+			critical = false;
+		};
+
+		function excellentCon(){
+			good = false;
+			fair = false;
+			excellent = true;
+			poor = false;
+			critical = false;
+		};
+
+		function turnonCon(){
+			good = true;
+			fair = true;
+			excellent = true;
+			poor = true;
+			critical = true;
+		};
+
+		const btn = document.querySelector('#condition_btn');
+        const sb = document.querySelector('#conditions')
+        btn.onclick = (event) => {
+            event.preventDefault();
+
+            if (sb.selectedIndex == 0)
+            	turnonCon();
+            else if (sb.selectedIndex == 1)
+            	criticalCon();
+            else if (sb.selectedIndex == 2)
+            	poorCon();
+            else if (sb.selectedIndex == 3)
+            	fairCon();
+            else if (sb.selectedIndex == 4)
+            	goodCon();
+            else if (sb.selectedIndex == 5)
+            	excellentCon();
+
+            resetMap();
+            // show the selected index
+            
+        };
 
 		function highlight(data){
 			var props = data.properties;
@@ -561,6 +700,8 @@ d3.json(polygonJSONFile, function(geoShape) {
 		};
 
 		});
+
+		
 });
 
 </script>
