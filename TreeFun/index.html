@@ -317,7 +317,7 @@ var tooltipTitle = "Address";
 // id attribute for points to be used for creating tooltip
 var pointKey = "FID";
 // list all variables to be included in the information window on hover over tooltip
-var variablesOnInfoWindow = ["PrimaryID", "FID", "Condition", "CommonName", "LatinName", "Address"];
+var variablesOnInfoWindow = ["FID", "Condition", "CommonName", "LatinName", "Address"];
 var formatPointLegend = d3.format(".2s");
 // suffix for legend
 var suffix = " in."
@@ -752,12 +752,12 @@ d3.json(polygonJSONFile, function(geoShape) {
               "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDVMbhe9xw_YMKfPDNm2yYDkEowtCV0jMI&location="+ lat_long;
 
 
-        function set_google(data){
-        	var lat = data.properties[POINT_Y];
-        	var long = data.properties[POINT_X];
+        // function set_google(data){
+        // 	var lat = data.properties[POINT_Y];
+        // 	var long = data.properties[POINT_X];
 
-        	console.log("hey");
-        }
+        // 	console.log("hey");
+        // }
 
 		function highlight(data){
 			var props = data.properties;
@@ -768,6 +768,13 @@ d3.json(polygonJSONFile, function(geoShape) {
 				// if(Number(props[d]))
 				// 	labelAttribute += "<br><b>" + d + ": "+ (formatPointLegend(props[d]) + "</b>";
 				// else
+				console.log(d);
+					if (d == "CommonName")
+						labelAttribute += "<br><b> Species: "+ props[d] + "</b>";
+					else if (d == "LatinName")
+						labelAttribute += "<br><b> Latin Species Name: "+ props[d] + "</b>";
+					else
+
 					labelAttribute += "<br><b>" + d + ": "+ props[d] + "</b>";
 			});
 			var labelName = data[pointKey];
