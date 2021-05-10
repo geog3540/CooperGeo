@@ -20,6 +20,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.21.0/d3-legend.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
 
+	<script type="text/javascript">
+		function inputValue(){
+        	var lat_long = latlongDict[document.getElementById("TreeID").value];
+        	document.getElementById("dynamic_google").src =
+              "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDVMbhe9xw_YMKfPDNm2yYDkEowtCV0jMI&location="+ lat_long;
+        };
+
+	</script>
+
 </head>
 <body>
 	<nav class="navbar navbar-default">
@@ -53,13 +62,12 @@
 
 	<div class="container">
 		<div class="col-md-12">
-			<div class="col-md-12">
 				<div class="row">
 					<h1>
 						Iowa City Trees: Size and Condition
 					</h1>
 				</div>
-				<div class="row">
+				<div class="col-md-6">
 					<h2>
 						Introduction
 					</h2>
@@ -73,8 +81,12 @@
 
 					</p>
 				</div>
+				<div class="row">
+					<img src="images/headshot.png" alt="">
+				</div>
 
 			</div>
+			
 
 			<div class="col-md-12">
 				<div class="row">
@@ -114,13 +126,13 @@
 				</div>
 				
 			</div>
-			<div class="col-md-12">
-				<div class="row">
+			<div class="row">
+				<div class="col-md-12">
 					<h3>
 						Example trees in critical / poor condition
 					</h3>
 				</div>
-				<div class="row">
+				<div class="col-md-6">
 					<p>
 						Would you be able to identify a potentially hazardous tree in your own backyard?
 					</p>
@@ -131,12 +143,12 @@
 						Try to imagine whether you would realize from first glance that these examples fell into one of the major risk categories.
 					</p>
 				</div>
-				<div class="row">
+				<div class="col-md-12">
 					<h4>
 						Example tree 1:
 					</h4>
 					<p>
-						PrimaryID: 18933
+						FID: 27178
 					</p>
 					<p>
 						Species: White oak
@@ -145,17 +157,17 @@
 						DBH: 52 inches
 					</p>
 				</div>
-				<div class="row">
+				<div class="col-md-12">
 
-						<iframe src="https://www.google.com/maps/embed?pb=!4v1620345825230!6m8!1m7!1s2jLNu3KnUXW3kY17TCOaPQ!2m2!1d41.67101011233746!2d-91.55266029186882!3f122.67974480825123!4f14.405634529559919!5f0.7820865974627469" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+						<iframe src="https://www.google.com/maps/embed?pb=!4v1620345825230!6m8!1m7!1s2jLNu3KnUXW3kY17TCOaPQ!2m2!1d41.67101011233746!2d-91.55266029186882!3f122.67974480825123!4f14.405634529559919!5f0.7820865974627469" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
 				</div>
-				<div class="row">
+				<div class="col-md-6">
 					<h4>
 						Example tree 2:
 					</h4>
 					<p>
-						PrimaryID: 2008
+						FID: 40580
 					</p>
 					<p>
 						Species: Sugar maple
@@ -164,18 +176,18 @@
 						DBH: 51 inches
 					</p>
 				</div>
-				<div class="row">
+				<div class="col-md-12">
 
 						<iframe src="https://www.google.com/maps/embed?pb=!4v1620347064159!6m8!1m7!1sKTWouwwABXbTKSYiiQUqQA!2m2!1d41.66920357202299!2d-91.5256915161654!3f313.00986818727534!4f20.300755369031478!5f0.7820865974627469" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
 				</div>
 			</div>
-			<div class="row">
+			<div class="col-md-6">
 					<h4>
 						Example tree 3:
 					</h4>
 					<p>
-						PrimaryID: 3261
+						FID: 39585
 					</p>
 					<p>
 						Species: Sugar maple
@@ -184,13 +196,60 @@
 						DBH: 47 inches
 					</p>
 				</div>
-				<div class="row">
+				<div class="col-md-12">
 
 						<iframe src="https://www.google.com/maps/embed?pb=!4v1620348947038!6m8!1m7!1sIjkvO4ON2unjNy5RkSqclA!2m2!1d41.65891995594479!2d-91.51976336223404!3f159.4937708617165!4f23.22832369385212!5f0.7820865974627469" width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
 				</div>
-			</div>
+				<div class="col-md-12" name="Tree explorer">
 
+				<div class="col-md-12">
+					<h3>
+						Tree explorer
+					</h3>	
+				</div>
+				<div class="col-md-6">
+					<p>
+						Try searching for a tree on your own. You can search for any of the trees that are captured in the interactive map above. This could be very helpful to get an idea of what different types of trees might look like. 
+					</p>
+					<p>
+						<em>How to use the tree explorer: </em>Once you've found a tree of interest from the interactive map, all you need to do is find the FID value from the tooltip hover-over and enter that into the search bar below. When you click go, a view from Google street maps will appear. The location for the view is set to the closest location to the coordinates of the tree where a Google streetview image is available. You will have to adjust the direction of the view using the compass in the bottom right corner of the view. Use the location of the tree in reference to the nearest street on the map above as a reference for adjusting the direction of the view.
+					</p>
+					<p>
+						Some trees may not have streetview images available. You will be most successful searching for trees that are located on major streets.
+					</p>	
+				</div>
+				
+				<div class="col-md-6">
+					<form>
+					  <label for="text">FID:</label><br>
+					  <input type="text" id="TreeID" name="Tree ID"><br>
+					  <button type="button" onclick="inputValue();" id=IDButton>Get Value</button>
+					</form>
+					<br>
+				</div>
+					
+				  
+				<div>
+					<iframe
+					  id = "dynamic_google"
+					  width="800"
+					  height="600"
+					  style="border:0"
+					  src="" allowfullscreen>
+					</iframe>
+				</div>
+				
+			</div>
+			</div>
+			
+
+
+		
+		<div class="row">
+			<div class="col-md-6">
+				
+			</div>
 		</div>
 	</div>
 </div>
@@ -251,7 +310,7 @@ var tooltipTitle = "Address";
 // id attribute for points to be used for creating tooltip
 var pointKey = "FID";
 // list all variables to be included in the information window on hover over tooltip
-var variablesOnInfoWindow = ["PrimaryID", "Condition", "CommonName", "LatinName", "Address"];
+var variablesOnInfoWindow = ["PrimaryID", "FID", "Condition", "CommonName", "LatinName", "Address"];
 var formatPointLegend = d3.format(".2s");
 // suffix for legend
 var suffix = " in."
@@ -296,6 +355,7 @@ var colorsArray = colors[numOfClasses].map(function(rgb) { return d3.hsl(rgb); }
 var radius;
 var pointValues = [];
 var polygonValues = [];
+var latlongDict = {};
 var transform, path;
 
 function recalculateAttribute(attribute, multiplyby, divideby) {
@@ -319,10 +379,12 @@ d3.json(polygonJSONFile, function(geoShape) {
 				divide = d.properties[divideBy];
 				d.properties[attributeAlias] = recalculateAttribute(d.properties[attributeName], multiplyBy, d.properties[divideBy]);
 				if(d.properties[attributeAlias]){
-					polygonValues.push(+d.properties[attributeAlias]);
+					polygonValues.push(+d.properties[attributeAlias])
 				}
 			}else{
 				if(d.properties[attributeName]){
+					// latlongDict[d.properties["PrimaryID"]] = d.properties["POINT_X"]
+					console.log("hey!")
 					polygonValues.push(+d.properties[attributeName]);
 				}
 			}
@@ -348,8 +410,10 @@ d3.json(polygonJSONFile, function(geoShape) {
 		collection.features.forEach(function(d) {
 			d.LatLng = new L.LatLng(d.geometry.coordinates[1],
 				d.geometry.coordinates[0]);
+				latlongDict[d.properties["FID"]] = "" + d.properties.POINT_Y + "," + d.properties.POINT_X;
 				pointValues.push(d.properties[pointVariable]);
 			})
+
 
 			radius = d3.scaleSqrt()
 			.domain(d3.extent(pointValues))
@@ -561,6 +625,7 @@ d3.json(polygonJSONFile, function(geoShape) {
 	
 			}).on("mouseover", highlight)
 			.on("mouseout", dehighlight)
+			.on("click", set_google)
 			.on("mousemove", moveLabel);
 
 		}//end of  map
@@ -664,6 +729,29 @@ d3.json(polygonJSONFile, function(geoShape) {
             
         };
 
+        
+
+
+        
+
+        
+
+        // console.log("hey!", inputValue);
+        // console.log("hey!",latlongDict);
+
+        var lat_long = "41.66361421,-91.52081417";
+
+        document.getElementById("dynamic_google").src =
+              "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDVMbhe9xw_YMKfPDNm2yYDkEowtCV0jMI&location="+ lat_long;
+
+
+        function set_google(data){
+        	var lat = data.properties[POINT_Y];
+        	var long = data.properties[POINT_X];
+
+        	console.log("hey");
+        }
+
 		function highlight(data){
 			var props = data.properties;
 			var labelAttribute = "<h1>"+ "DBH: " + formatPointLegend(props[pointVariable]) + " in." + "</h1><br><b> " +"</b>";
@@ -689,6 +777,13 @@ d3.json(polygonJSONFile, function(geoShape) {
 		function dehighlight(data){
 			d3.select("#id"+data[pointKey]+"label").remove(); //remove info label
 			d3.select("#info-label").selectAll("*").remove();
+		};
+
+		function set_google(){
+			var x = '';
+			var y = '';
+
+			return
 		};
 
 		function moveLabel() {
