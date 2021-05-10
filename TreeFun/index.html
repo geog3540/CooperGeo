@@ -94,10 +94,10 @@
 						Interactive tree map
 					</h2>
 					<p>
-						<strong>About this map:</strong> This map displays tree located in Iowa City. The data was published in 2019 after a three year effort to survey trees in the area. You can read more about the effort and its purpose <a href="https://www.thegazette.com/education/iowa-city-launches-interactive-database-of-its-trees/">here</a>. The data captured includes information on tree size, which is captured by the DBH (diameter at breast height) field. It also captures information on tree condition, which are rated as critical/dead, poor, fair, good, and excellent. Both of these metrics are indicators of the risk of damage to personal property during storm events. (See <a href="https://www.biorxiv.org/content/10.1101/666305v1.full#F7">High-resolution mapping of forest vulnerability to wind for disturbance-aware forestry and climate change adaptation</a> and <a href="https://academic.oup.com/forestry/article/81/3/317/656198">Tree damage risk factors associated with large, infrequent wind disturbances of Carolina forests</a>) <em><strong>This map is not intended to be convey a precise estimation of risk.</strong></em> Rather, the way that this map should be used is to give you a sense of possible risk factors and what these might look like in real life.
+						<strong>About this map:</strong> This map displays tree located in Iowa City. The data was published in 2019 after a three year effort to survey trees in the area. You can read more about the effort and its purpose <a href="https://www.thegazette.com/education/iowa-city-launches-interactive-database-of-its-trees/">here</a>. The data includes information on tree size, which is captured by the DBH (diameter at breast height) field. It also captures information on tree condition, which are rated as critical/dead, poor, fair, good, and excellent. Both of these metrics are indicators of the risk of damage to personal property during storm events. Trees that are in worse condition and trees that have a wider DBH are more likely to cause damge in the event of a storm. (See <a href="https://www.biorxiv.org/content/10.1101/666305v1.full#F7">High-resolution mapping of forest vulnerability to wind for disturbance-aware forestry and climate change adaptation</a> and <a href="https://academic.oup.com/forestry/article/81/3/317/656198">Tree damage risk factors associated with large, infrequent wind disturbances of Carolina forests</a>) <em><strong>This map is not intended to be convey a precise estimation of risk.</strong></em> Rather, the way that this map should be used is to give you a sense of possible risk factors and what these might look like in real life.
 					</p>
 					<p>
-						<strong>How to use this map: </strong>This map work best if the map is located at the bottom of your screen. You can use the dropdown menu to view only trees of certain conditions. The color of the points reflect the condition of the tree and the size of the points reflect the size of the trees. To gain more information about a specific tree, hover over the point with your mouse and a tooltip will pop up with additional information. You can udjust the zoom of the map by using the buttons in the top left of the map or by scrolling up or down. You can adjust your view by clicking and dragging the screen.
+						<strong>How to use this map: </strong>To view only trees of certain conditions, you can use the dropdown menu. The color of the points reflect the condition of the tree and the size of the points reflect the size of the trees. To gain more information about a specific tree, hover over the point with your mouse and a tooltip will pop up with additional information. You can udjust the zoom of the map by using the buttons in the top left of the map or by scrolling up or down. You can adjust your view by clicking and dragging the screen.
 					</p>
 				</div>
 				<div class="col-md-12">
@@ -220,10 +220,10 @@
 						Try searching for a tree on your own. You can search for any of the trees that are captured in the interactive map above. This could be very helpful to get an idea of what different types of trees might look like. 
 					</p>
 					<p>
-						<em>How to use the tree explorer: </em>Once you've found a tree of interest from the interactive map, all you need to do is find the FID value from the tooltip hover-over and enter that into the search bar below. When you click go, a view from Google street maps will appear. The location for the view is set to the closest location to the coordinates of the tree where a Google streetview image is available. You will have to adjust the direction of the view using the compass in the bottom right corner of the view. Use the location of the tree in reference to the nearest street on the map above as a reference for adjusting the direction of the view.
+						<strong>How to use the tree explorer: </strong>Once you've found a tree of interest from the interactive map, all you need to do is find the FID value from the tooltip hover-over and enter that into the text box that's labeled FID. When you click go, a view from Google street maps will appear. The location for the view is set to the closest location to the coordinates of the tree where a Google streetview image is available. You will have to adjust the direction of the view using the compass in the bottom right corner of the view. Use the location of the tree in reference to the nearest street on the map above as a reference for adjusting the direction of the view. To view the date of when the photo was captured, click "view on Google Maps" on the top right of the screen. This version will display the date in the bottom right of the screen.
 					</p>
 					<p>
-						Some trees may not have streetview images available. You will be most successful searching for trees that are located on major streets.
+						<strong>Note: </strong>Some trees may not have streetview images available. You will be most successful searching for trees that are located on major streets.
 					</p>	
 				</div>
 				
@@ -746,7 +746,7 @@ d3.json(polygonJSONFile, function(geoShape) {
         // console.log("hey!", inputValue);
         // console.log("hey!",latlongDict);
 
-        var lat_long = "41.66361421,-91.52081417";
+        var lat_long = "41.67942632,-91.53705977";
 
         document.getElementById("dynamic_google").src =
               "https://www.google.com/maps/embed/v1/streetview?key=AIzaSyDVMbhe9xw_YMKfPDNm2yYDkEowtCV0jMI&location="+ lat_long;
